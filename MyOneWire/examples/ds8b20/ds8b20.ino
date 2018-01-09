@@ -10,12 +10,12 @@ Serial.begin(115200);
 void loop() {
   // put your main code here, to run repeatedly:
 t.resetPresence(); // инициализация
- t.masterWrite(SkipRom);
- t.masterWrite(ConvertT);
+ t.masterWrite(SKIP_ROM); // отправляем 8-bit команды
+ t.masterWrite(CONVERT_T);
  delay(1);
  t.resetPresence();
- t.masterWrite(SkipRom);
- t.masterWrite(ReadScratchpad); // отправляем 8-bit команду
+ t.masterWrite(SKIP_ROM);
+ t.masterWrite(READ_SCRATCHPAD); 
  
  byte data[8] = {0};
  uint8_t cntByte = 0;
@@ -25,7 +25,7 @@ t.resetPresence(); // инициализация
   
   
     //if(t.masterRead() == 1){
-      data[cntByte] |= t.masterRead() << cntBit; // читаем ответ
+      data[cntByte] |= t.masterRead() << cntBit; // читаем ответ по одному биту и пишем в байт
     //}
     if(cntBit++ == 7){
     cntBit = 0;
