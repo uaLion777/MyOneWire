@@ -1,6 +1,9 @@
 /*
-
-*/
+ * Описание: Библиотека для работы с протоколом 1-wire
+ * Автор: uaLion777
+ * Контакты: agro.sprava@gmail.com
+ * Дата: 10.01.2018
+ */
 
 #pragma once
 typedef unsigned char uint8_t;
