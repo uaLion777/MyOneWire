@@ -32,7 +32,7 @@ private:
 public:
 	MyOneWire(uint8_t);
 
-	int resetPresence();        // инициализация (сброс - присутствие)
+	uint8_t resetPresence(void);        // инициализация (сброс - присутствие)
 	void masterWrite(uint8_t);  // отправляем данные побайтно 8 бит 
-	uint8_t masterRead();       // принимаем данные побитно, начиная с младшего
+	uint8_t masterRead(void);       // принимаем данные побитно, начиная с младшего
 };
