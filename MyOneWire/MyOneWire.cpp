@@ -67,7 +67,6 @@ void MyOneWire::masterWrite(uint8_t command)
 uint8_t  MyOneWire::masterRead()
 {
 	// читаем ответ, прижимаем к 0 на от 1мкс и до < 15мкс слушаем ответ
-	delayMicroseconds(60);
 	pinMode(pinIO_, OUTPUT);
 	delayMicroseconds(4);
 	pinMode(pinIO_, INPUT); // отпускаем и до  < 15мкс смотрим ответ - 0 или 1
