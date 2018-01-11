@@ -8,7 +8,7 @@ MyOneWire::MyOneWire(uint8_t pin) : pinIO_(pin)
 }
 
 /*** сбросПрисутствие ***/
-int MyOneWire::resetPresence()
+uint8_t MyOneWire::resetPresence()
 {
 	// инициализация по шине 1-Wire, посылаем сигнал сброса
 	pinMode(pinIO_, OUTPUT); // прижимаем шину к 0
@@ -24,12 +24,12 @@ int MyOneWire::resetPresence()
 		{
 			if ((micros() - t) > 250)
 			{
-				return 250;   // выход при зацикливании
+				return 2;   // превышен таймаут
 			}
 		}
 		else
 		{
-			if ((micros() - t) < 60) return -60;
+			if ((micros() - t) < 60) return 3; // превышен таймаут
 			break;
 		}
 	}
@@ -66,22 +66,12 @@ void MyOneWire::masterWrite(uint8_t command)
 /*** Метод считывания данных на шине 1-Wire ***/
 uint8_t  MyOneWire::masterRead()
 {
-	uint8_t bit;
 	// читаем ответ, прижимаем к 0 на от 1мкс и до < 15мкс слушаем ответ
 	delayMicroseconds(60);
 	pinMode(pinIO_, OUTPUT);
 	delayMicroseconds(4);
 	pinMode(pinIO_, INPUT); // отпускаем и до  < 15мкс смотрим ответ - 0 или 1
 	delayMicroseconds(4);
-
-	if (digitalRead(pinIO_) == LOW)
-	{
-		bit = 0x00; // возвращаем 0
-	}
-	else
-	{
-		bit = 0x01; // возвращаем 1
-	}
-	//delayMicroseconds(68);
-	return bit;
+	
+	return digitalRead(pinIO_;
 }
